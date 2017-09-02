@@ -1,0 +1,36 @@
+{
+  "name": "unity-scroll-lists",
+  "version": "0.0.1",
+  "description": "Generic controller for a UI scrolling list of items",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beatthat/unity-scroll-lists.git"
+  },
+  "files": [
+    "index.js",
+    "scripts",
+    "src"
+  ],
+  "author": "larrykirschner@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beatthat/unity-scroll-lists/issues"
+  },
+  "homepage": "https://github.com/beatthat/unity-scroll-lists",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "unity-bindings": "github:beatthat/unity-bindings#semver:^0.0.3",
+    "unity-binding-behaviours": "github:beatthat/unity-binding-behaviours#semver:^0.0.9",
+    "unity-common-event-types": "github:beatthat/unity-common-event-types#semver:^0.0.1",
+    "unity-controllers": "github:beatthat/unity-controllers#semver:^0.0.2",
+    "unity-item-managers": "github:beatthat/unity-item-managers#semver:^0.0.1",
+    "unity-rect-extensions": "github:beatthat/unity-rect-extensions#semver:^0.0.1",
+    "unity-utils": "github:beatthat/unity-utils#semver:^0.0.5"
+  }
+}
