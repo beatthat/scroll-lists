@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BeatThat.UI
+namespace BeatThat
 {
 	/// <summary>
 	/// Adjust scroll position of a scrolling list so that (some point between) 

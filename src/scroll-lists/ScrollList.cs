@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
+using BeatThat.UI;
 
-namespace BeatThat.UI
+namespace BeatThat
 {
 	public class ScrollList<ItemType> : ScrollList<ItemType, ItemType> where ItemType : Component {}
 
@@ -262,5 +263,15 @@ namespace BeatThat.UI
 		public ScrollRect scrollRect { get { return m_scrollRect?? (m_scrollRect = GetComponent<ScrollRect>()); } }
 
 		private List<SafeRef<ListItemType>> m_listItems = new List<SafeRef<ListItemType>>();
+	}
+
+	public static class ScrollRectExt
+	{
+		public static RectTransform GetViewport(this ScrollRect scrollRect)
+		{
+			// Analysis disable ConvertConditionalTernaryToNullCoalescing
+			return scrollRect.viewport != null? scrollRect.viewport: scrollRect.transform as RectTransform;
+			// Analysis restore ConvertConditionalTernaryToNullCoalescing
+		}
 	}
 }

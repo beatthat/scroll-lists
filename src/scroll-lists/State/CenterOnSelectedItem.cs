@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using BeatThat.UI;
 
-namespace BeatThat.UI
+namespace BeatThat
 {
 	public class CenterOnSelectedItem : BindingStateBehaviour<IHasSelectedItem>
 	{
