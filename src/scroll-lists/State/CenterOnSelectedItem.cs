@@ -22,9 +22,10 @@ namespace BeatThat
 			return true;
 		}
 
-		override protected void BindState()
+		override protected void DidEnter()
 		{
 			Bind(this.controller.selectedItemUpdated, this.selectedItemUpdatedAction);
+			OnSelectedItemUpdated ();
 		}
 
 		private void OnSelectedItemUpdated()

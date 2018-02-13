@@ -8,13 +8,18 @@ using BeatThat.UI;
 
 namespace BeatThat
 {
+	public interface IHasItemAddedGoEvent 
+	{
+		UnityEvent<GameObject> itemAddedGO { get; }
+	}
+
 	public class ScrollList<ItemType> : ScrollList<ItemType, ItemType> where ItemType : Component {}
 
 	/// <summary>
 	/// Simple scroll list that manages adding and cleaning up items. 
 	/// Assumes all items are the same type/can be instantiated from a single prefab.
 	/// </summary>
-	public class ScrollList<ItemType, ListItemType> : Controller, ItemManager<ItemType>
+	public class ScrollList<ItemType, ListItemType> : Controller, ItemManager<ItemType>, IHasItemAddedGoEvent
 		where ListItemType : Component
 		where ItemType : class
 	{
