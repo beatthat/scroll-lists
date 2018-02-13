@@ -1,7 +1,7 @@
 {
   "name": "scroll-lists",
   "scope": "ape",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Generic controller for a UI scrolling list of items",
   "main": "index.js",
   "repository": {
