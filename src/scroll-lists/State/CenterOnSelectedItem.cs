@@ -6,6 +6,8 @@ namespace BeatThat
 {
 	public class CenterOnSelectedItem : BindingStateBehaviour<IHasSelectedItem>
 	{
+		public bool m_debug;
+
 		override protected bool WillEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
 			if(this.centerOn != null) {
@@ -32,13 +34,26 @@ namespace BeatThat
 		{
 			var go = this.controller.selectedGameObject;
 			if(go == null) {
+				#if UNITY_EDITOR || DEBUG_UNSTRIP
+				if(m_debug) {
+					Debug.Log("[" + Time.frameCount + "] " + GetType() + "::OnSelectedItemUpdated selected item is NULL");
+				}
+				#endif
 				return;
 			}
 			var rt = go.transform as RectTransform;
 			if(rt == null) {
+				#if UNITY_EDITOR || DEBUG_UNSTRIP
 				Debug.LogWarning("Expect selected items to have a rect transform");
+				#endif
 				return;
 			}
+
+			#if UNITY_EDITOR || DEBUG_UNSTRIP
+			if(m_debug) {
+				Debug.Log("[" + Time.frameCount + "] " + GetType() + "::OnSelectedItemUpdated will center on " + go.name);
+			}
+			#endif
 
 			this.centerOn.Center(rt);
 		}
