@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+using System.Collections;
+using BeatThat.Bindings;
+using BeatThat.ItemManagers;
+using BeatThat.SafeRefs;
+using BeatThat.TransformPathExt;
+using UnityEngine;
 using UnityEngine.Events;
-using BeatThat.UI;
 
-namespace BeatThat
+namespace BeatThat.ScrollLists
 {
-	public class CenterOnSelectedItem : BindingStateBehaviour<IHasSelectedItem>
+    public class CenterOnSelectedItem : BindingStateBehaviour<IHasSelectedItem>
 	{
 		public bool m_debug;
 
@@ -17,7 +21,7 @@ namespace BeatThat
 			this.centerOn = animator.GetComponentInChildren<CenterOn>(true);
 
 			if(this.centerOn == null) {
-				Debug.LogWarning("Missing required CenterOn child component. Maybe this behaviour is no longer wanted?");
+                Debug.LogWarning("[" + animator.Path() + "] Missing required CenterOn child component. Maybe this behaviour is no longer wanted?");
 				return false;
 			}
 
@@ -53,14 +57,27 @@ namespace BeatThat
 			if(m_debug) {
 				Debug.Log("[" + Time.frameCount + "] " + GetType() + "::OnSelectedItemUpdated will center on " + go.name);
 			}
-			#endif
+#endif
 
-			this.centerOn.Center(rt);
+            (this.controller as MonoBehaviour).StartCoroutine(WaitThenCenterOn(rt));
+			
 		}
 		private UnityAction selectedItemUpdatedAction { get { return m_selectedItemUpdatedAction?? (m_selectedItemUpdatedAction = this.OnSelectedItemUpdated); } }
 		private UnityAction m_selectedItemUpdatedAction;
 
 		private CenterOn centerOn { get { return m_centerOn.value; } set { m_centerOn = new SafeRef<CenterOn>(value); } }
 		private SafeRef<CenterOn> m_centerOn;
+
+        private IEnumerator WaitThenCenterOn(RectTransform rt, int waitFrames = 2)
+        {
+            for (var i = 0; i < waitFrames; i++) {
+                yield return new WaitForEndOfFrame();
+            }
+
+            this.centerOn.Center(rt);
+        }
 	}
 }
+
+
+

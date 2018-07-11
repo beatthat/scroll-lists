@@ -1,17 +1,19 @@
+using BeatThat.Rects;
+using BeatThat.TransformPathExt;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BeatThat
+namespace BeatThat.ScrollLists
 {
-	/// <summary>
-	/// Adjust scroll position of a scrolling list so that (some point between) 
-	/// the center of two items aligns with the center of the viewport.
-	/// 
-	/// This can be better for smooth scrolling along with a playback function
-	/// because it makes it easier to accomadate for both uneven 'time' values of each row 
-	/// as well as variable margin spaces between items.
-	/// </summary>
-	public class CenterOn : MonoBehaviour
+    /// <summary>
+    /// Adjust scroll position of a scrolling list so that (some point between) 
+    /// the center of two items aligns with the center of the viewport.
+    /// 
+    /// This can be better for smooth scrolling along with a playback function
+    /// because it makes it easier to accomadate for both uneven 'time' values of each row 
+    /// as well as variable margin spaces between items.
+    /// </summary>
+    public class CenterOn : MonoBehaviour
 	{
 		[Tooltip("Avg time is should take to reach scroll target")]
 		public float m_smoothTime = 0.1f;
@@ -21,6 +23,11 @@ namespace BeatThat
 		public ScrollRect m_scrollRect;
 
 		public bool m_debug;
+
+		public void ScrollToBeginning(bool snap = false)
+		{
+			ScrollTo (Vector2.one, snap);
+		}
 
 		/// <summary>
 		/// Adjust scroll position of a scrolling list so that the given item is at the center of the viewport.
@@ -67,10 +74,16 @@ namespace BeatThat
 			var curScroll = scRect.normalizedPosition;
 
 			// convert the above to normalized values
-			m_scrollTgt = new Vector2(
+			ScrollTo(new Vector2(
 				totalScrollDist.x > 0f? Mathf.Clamp01(tgtScrollContentSpace.x / totalScrollDist.x): curScroll.x, 
 				totalScrollDist.y > 0f? Mathf.Clamp01(tgtScrollContentSpace.y / totalScrollDist.y): curScroll.y
-			);
+			), snap);
+		}
+
+		private void ScrollTo(Vector2 tgt, bool snap = false)
+		{
+			// convert the above to normalized values
+			m_scrollTgt = tgt;
 
 			if(m_debug) {
 				Debug.LogWarning("[" + Time.frameCount + "][" + this.Path() + "] " + GetType() + " set scroll target to " + m_scrollTgt);
@@ -81,7 +94,7 @@ namespace BeatThat
 				m_scrollVelocity = Vector3.zero;
 				return;
 			}
-				
+
 			this.enabled = true;
 		}
 
@@ -134,4 +147,7 @@ namespace BeatThat
 		private Vector2 m_scrollTgt = Vector2.zero;
 	}
 }
+
+
+
 

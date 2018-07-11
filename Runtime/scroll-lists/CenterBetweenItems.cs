@@ -1,17 +1,18 @@
+using BeatThat.Rects;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BeatThat
+namespace BeatThat.ScrollLists
 {
-	/// <summary>
-	/// Adjust scroll position of a scrolling list so that (some point between) 
-	/// the center of two items aligns with the center of the viewport.
-	/// 
-	/// This can be better for smooth scrolling along with a playback function
-	/// because it makes it easier to accomadate for both uneven 'time' values of each row 
-	/// as well as variable margin spaces between items.
-	/// </summary>
-	public class CenterBetweenItems : MonoBehaviour
+    /// <summary>
+    /// Adjust scroll position of a scrolling list so that (some point between) 
+    /// the center of two items aligns with the center of the viewport.
+    /// 
+    /// This can be better for smooth scrolling along with a playback function
+    /// because it makes it easier to accomadate for both uneven 'time' values of each row 
+    /// as well as variable margin spaces between items.
+    /// </summary>
+    public class CenterBetweenItems : MonoBehaviour
 	{
 		[Tooltip("Avg time is should take to reach scroll target")]
 		public float m_smoothTime = 0.1f;
@@ -98,4 +99,7 @@ namespace BeatThat
 		private Vector2 m_scrollTgt = Vector2.zero;
 	}
 }
+
+
+
 

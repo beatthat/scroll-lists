@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using BeatThat;
+using BeatThat.ItemManagers;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using UnityEngine.Events;
-using BeatThat.UI;
 
-namespace BeatThat
+namespace BeatThat.ScrollLists
 {
 
-	public class ScrollList<ItemType> : ScrollList<ItemType, ItemType> where ItemType : Component {}
+    public class ScrollList<ItemType> : ScrollList<ItemType, ItemType> where ItemType : Component {}
 
 	/// <summary>
 	/// Simple scroll list that manages adding and cleaning up items. 
@@ -38,3 +34,5 @@ namespace BeatThat
 		}
 	}
 }
+
+
