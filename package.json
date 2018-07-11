@@ -1,7 +1,7 @@
 {
   "name": "scroll-lists",
   "scope": "beatthat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generic controller for a UI scrolling list of items",
   "main": "index.js",
   "repository": {
